@@ -1,0 +1,5 @@
+discord.py>=2.3.2
+pytrends>=4.9.2
+feedparser>=6.0.10
+python-dotenv>=1.0.1
+requests>=2.31.0
