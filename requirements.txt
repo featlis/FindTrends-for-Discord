@@ -1,5 +1,5 @@
 discord.py>=2.3.2
-pytrends>=4.9.2
+aiohttp>=3.9.0
 feedparser>=6.0.10
 python-dotenv>=1.0.1
 requests>=2.31.0
