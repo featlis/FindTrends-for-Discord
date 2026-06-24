@@ -57,22 +57,24 @@ class Trends(commands.Cog):
 
             embed = discord.Embed(
                 title="📈 現在の急上昇トレンド（日本）",
-                description="Google トレンド — リアルタイム急上昇ワード",
-                color=0x4285F4,  # Google ブルー
+                color=discord.Color.blue()
             )
 
             # サムネイルは1位のトレンドの画像を使用
             if trends[0]["picture"]:
                 embed.set_thumbnail(url=trends[0]["picture"])
 
-            lines = []
             for i, t in enumerate(trends, 1):
                 keyword = t["title"]
                 traffic = t["traffic"]
                 search_url = f"https://trends.google.co.jp/trending?q={quote(keyword)}&geo=JP"
-                lines.append(f"**{i}.** [{keyword}]({search_url}) — 🔍 {traffic} 検索")
+                
+                embed.add_field(
+                    name=f"第{i}位: {keyword}",
+                    value=f"🔍 {traffic} 検索\n[詳細を見る]({search_url})",
+                    inline=False
+                )
 
-            embed.description = "\n".join(lines)
             embed.set_footer(text="Google Trends • データはリアルタイムで変動します")
 
             await interaction.followup.send(embed=embed)
