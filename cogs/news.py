@@ -4,6 +4,7 @@ from discord import app_commands
 import feedparser
 import urllib.parse
 import asyncio
+import calendar
 
 class News(commands.Cog):
     def __init__(self, bot):
@@ -63,10 +64,19 @@ class News(commands.Cog):
             )
             
             for entry in entries:
-                # タイトルとリンクを追加
+                # 配信元と公開日時を取得
+                source = entry.get('source', {}).get('title', '不明')
+                
+                if hasattr(entry, 'published_parsed') and entry.published_parsed:
+                    ts = calendar.timegm(entry.published_parsed)
+                    # 絶対時間(例: 2026年6月25日 10:00) と 相対時間(例: 2時間前) を表示
+                    time_str = f"<t:{int(ts)}:f> (<t:{int(ts)}:R>)"
+                else:
+                    time_str = "日時不明"
+
                 embed.add_field(
                     name=entry.title,
-                    value=f"[記事を読む]({entry.link})",
+                    value=f"🗞️ **{source}** • 🕒 {time_str}\n[記事を読む]({entry.link})",
                     inline=False
                 )
             
