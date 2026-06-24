@@ -67,11 +67,11 @@ class Trends(commands.Cog):
             for i, t in enumerate(trends, 1):
                 keyword = t["title"]
                 traffic = t["traffic"]
-                search_url = f"https://trends.google.co.jp/trending?q={quote(keyword)}&geo=JP"
+                search_url = f"https://www.google.com/search?q={quote(keyword)}"
                 
                 embed.add_field(
                     name=f"第{i}位: {keyword}",
-                    value=f"🔍 {traffic} 検索\n[詳細を見る]({search_url})",
+                    value=f"🔍 {traffic} 検索\n[Googleで検索]({search_url})",
                     inline=False
                 )
 
